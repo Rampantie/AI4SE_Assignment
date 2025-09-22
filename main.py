@@ -24,21 +24,37 @@ def get_exif_date(image_path):
     
     return None
 
-def calculate_position(img_width, img_height, text_width, text_height, position):
-    """Calculate text position based on user input"""
-    padding = 10
-    if position == "top-left":
-        return (padding, padding)
-    elif position == "top-right":
-        return (img_width - text_width - padding, padding)
+def calculate_position(image_width, image_height, text_width, text_height, position, margin=10):
+    """
+    Calculate the position of the watermark text to ensure it stays within the image boundaries.
+    :param image_width: Width of the image
+    :param image_height: Height of the image
+    :param text_width: Width of the watermark text
+    :param text_height: Height of the watermark text
+    :param position: Desired position ('bottom-right', 'bottom-left', etc.)
+    :param margin: Margin from the edges of the image
+    :return: Tuple (x, y) for the text position
+    """
+    if position == "bottom-right":
+        x = image_width - text_width - margin
+        y = image_height - text_height * 1.2 - margin
     elif position == "bottom-left":
-        return (padding, img_height - text_height - padding)
-    elif position == "bottom-right":
-        return (img_width - text_width - padding, img_height - text_height - padding)
+        x = margin
+        y = image_height - text_height * 1.2 - margin
+    elif position == "top-right":
+        x = image_width - text_width - margin
+        y = margin
+    elif position == "top-left":
+        x = margin
+        y = margin
     elif position == "center":
-        return ((img_width - text_width) // 2, (img_height - text_height) // 2)
+        x = (image_width - text_width) // 2
+        y = (image_height - text_height) // 2
     else:
-        return (padding, padding)  # Default to top-left
+        raise ValueError(f"Unknown position: {position}")
+    
+    
+    return x, y
 
 def add_watermark_to_image(image_path, output_dir, font_size, color, position):
     """Add watermark to a single image"""
@@ -65,6 +81,7 @@ def add_watermark_to_image(image_path, output_dir, font_size, color, position):
         text_width = bbox[2] - bbox[0]
         text_height = bbox[3] - bbox[1]
         
+        # Adjust position to ensure it stays within bounds
         text_position = calculate_position(img.width, img.height, text_width, text_height, position)
         
         # Add text watermark
