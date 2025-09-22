@@ -55,7 +55,7 @@ def add_watermark_to_image(image_path, output_dir, font_size, color, position):
         
         # Create font
         try:
-            font = ImageFont.truetype("Arial", font_size)
+            font = ImageFont.truetype("fonts/Arial.ttf", font_size)
         except:
             font = ImageFont.load_default()
             print("Arial font not found, using default font")
