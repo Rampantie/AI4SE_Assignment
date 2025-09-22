@@ -121,9 +121,9 @@ def main():
     # Handle input path
     input_path = Path(args.image_path)
     
-    # Create output directory
+    # Create output directory as a subdirectory of the input directory
     if input_path.is_dir():
-        output_dir = input_path.parent / f"{input_path.name}_watermark"
+        output_dir = input_path / f"{input_path.name}_watermark"
         image_files = list(input_path.glob("*.[jJ][pP][gG]")) + \
                      list(input_path.glob("*.[jJ][pP][eE][gG]")) + \
                      list(input_path.glob("*.[pP][nN][gG]")) + \
