@@ -21,7 +21,7 @@ pip install Pillow piexif
 Run the script (example): 
 
 ```shell
-python watermark_tool.py /path/to/images --font-size 30 --color white --position bottom-right
+python main.py /path/to/images --font-size 30 --color white --position bottom-right
 ```
 
 The program supports common image formats (JPEG, PNG, TIFF) and will create a new directory with watermarked versions of all images in the input picture directory.
