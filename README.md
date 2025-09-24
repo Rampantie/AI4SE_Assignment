@@ -4,25 +4,27 @@
 
 **This program:**
 
-1. Takes an image file path or directory path as input
-2. Extracts the EXIF date information using the piexif library
-3. Allows customization of font size, color, and position through command-line arguments
-4. Adds the date watermark to all supported images in the directory
-5. Saves watermarked images to a new subdirectory with the "_watermark" suffix
+1. 接受图像文件路径或目录路径作为输入
+2. 使用piexif库提取EXIF日期信息
+3. 支持通过命令行参数自定义字体大小、颜色及位置
+4. 为目录内所有支持的图像添加日期水印
+5. 将添加水印的图像保存至新子目录，文件名后缀为“_watermark”
 
 **To use this program:**
 
-Install required libraries: 
+安装必要的依赖：
 
 ```shell
 pip install Pillow piexif
 ```
 
-Run the script (example): 
+运行该程序的示例命令行输入: 
 
 ```shell
-python main.py /path/to/images --font-size 30 --color white --position bottom-right
+python main.py /path/to/images --font-size 100 --color white --position bottom-right
 ```
 
-The program supports common image formats (JPEG, PNG, TIFF) and will create a new directory with watermarked versions of all images in the input picture directory.
+水印字号以像素为单位。
+
+该程序支持常见图像格式（JPG、JPEG、PNG、TIFF），并将创建一个新目录，其中包含输入图片目录中所有图像的水印版本。
 
